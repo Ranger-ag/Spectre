@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mainplayercontroller : MonoBehaviour
+public class MainPlayerController : MonoBehaviour
 {
     public Camera camera;
     public Transform ball, cameraPos;
@@ -37,14 +37,14 @@ public class Mainplayercontroller : MonoBehaviour
         cameraSpeed = levelSpeed;
         StartPoint[0] = cameraPos.position;
         StartPoint[1] = ball.position;
-        StartPoint[2] = progress.position;
+        //StartPoint[2] = progress.position;
         StartPoint[0].z += startPos;
         StartPoint[1].z += startPos;
         StartPoint[2].z += startPos;
         track = !preview;
         cameraPos.position = StartPoint[0];
         ball.position = StartPoint[1];
-        progress.position = StartPoint[2];
+        //progress.position = StartPoint[2];
     }
     // Update is called once per frame
     void Update()
@@ -92,7 +92,7 @@ public class Mainplayercontroller : MonoBehaviour
     {
         cameraPos.position = StartPoint[0];
         ball.position = StartPoint[1];
-        progress.position = StartPoint[2];
+        //progress.position = StartPoint[2];
         run = false;
         lose = false;
         win = false;
@@ -105,7 +105,7 @@ public class Mainplayercontroller : MonoBehaviour
             ball.position = new Vector3(ball.position.x, ball.position.y, ball.position.z + (Time.deltaTime * levelSpeed));
         }
         cameraPos.position = new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + (Time.deltaTime * cameraSpeed));
-        progress.position = new Vector3(0, 0, progress.position.z + Time.deltaTime * levelSpeed);
+        //progress.position = new Vector3(0, 0, progress.position.z + Time.deltaTime * levelSpeed);
     }
     void UpdateCamera()
     {
@@ -124,7 +124,8 @@ public class Mainplayercontroller : MonoBehaviour
     }
     public void Jump(float jumpHeight)
     {
-        rb.AddForce(0, jumpHeight, 0);
+        rb.velocity = new Vector3(rb.velocity.x, 4, rb.velocity.z);
+        rb.AddForce(0, jumpHeight, 0, ForceMode.Impulse);
     }
     [System.Serializable]
     public class ballSettings
